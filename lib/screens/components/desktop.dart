@@ -417,25 +417,6 @@ class _BuySellCard extends StatelessWidget {
   }
 }
 
-Stream<List<double>> generateNumbers = (() async* {
-  List<double> graphPoints = [];
-  var rand = Random();
-
-  while (true) {
-    await Future<void>.delayed(const Duration(seconds: 5));
-    if (graphPoints.isEmpty) {
-      for (var i = 0; i < 25; i++) {
-        graphPoints.add(rand.nextDouble() * 100);
-      }
-    } else {
-      graphPoints.removeAt(0);
-      graphPoints.add(rand.nextDouble() * 100);
-    }
-    debugPrint("Working");
-    yield graphPoints;
-  }
-})();
-
 class _DualColoredBox extends StatelessWidget {
   const _DualColoredBox(
       {required this.child,
@@ -469,6 +450,265 @@ class _DualColoredBox extends StatelessWidget {
         ),
       ),
       child: child,
+    );
+  }
+}
+
+class _VolumeCard extends StatelessWidget {
+  const _VolumeCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(5.f),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Volume",
+              style: TextStyle(
+                color: AppColors.text,
+                fontSize: 8.f,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                top: 5.f,
+              ),
+              padding: EdgeInsets.all(10.f),
+              decoration: BoxDecoration(
+                color: AppColors.text.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(10.sp),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "28,98,053\n",
+                    style: TextStyle(
+                      fontSize: 9.f,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "Last Trated Qty",
+                      children: [
+                        TextSpan(
+                          text: "\n500\n",
+                          style: TextStyle(
+                            fontSize: 6.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 5.f,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Lower circuit",
+                        style: TextStyle(
+                          fontSize: 5.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        "936.46",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Upper circuit",
+                        style: TextStyle(
+                          fontSize: 5.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        "984.20",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _PriceIndicatorCard extends StatelessWidget {
+  const _PriceIndicatorCard({
+    required this.priIndicators,
+  });
+
+  final List<String> priIndicators;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(5.f),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Price Indicators",
+              style: TextStyle(
+                color: AppColors.text,
+                fontSize: 8.f,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                top: 5.f,
+              ),
+              padding: EdgeInsets.all(10.f),
+              decoration: BoxDecoration(
+                color: AppColors.text.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(10.sp),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      for (var i = 0; i < priIndicators.length; i++)
+                        Text.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(
+                            text: "925.67",
+                            children: [
+                              TextSpan(
+                                text: "\n${priIndicators[i]}".toUpperCase(),
+                                style: TextStyle(
+                                  color: AppColors.text.withOpacity(0.75),
+                                  fontSize: 5.f,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 8.f,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "\nAverage Trade Price",
+                      children: [
+                        TextSpan(
+                          text: "\n925.67",
+                          style: TextStyle(
+                            fontSize: 7.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 6.f,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _TradeWidget extends StatelessWidget {
+  const _TradeWidget();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 5,
+      child: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 3.h),
+        child: Column(
+          children: [
+            Text(
+              "Looks like a good time to trade!",
+              style: TextStyle(
+                color: AppColors.blue,
+                fontSize: 7.f,
+              ),
+            ),
+            Text(
+              "Options",
+              style: TextStyle(
+                color: Colors.blue.shade900,
+                fontSize: 7.f,
+                decoration: TextDecoration.underline,
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: Container(
+                margin: EdgeInsets.only(top: 1.h),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 12.w,
+                  vertical: 3.f,
+                ),
+                decoration: const ShapeDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.purple, Colors.purpleAccent],
+                  ),
+                  shape: StadiumBorder(),
+                ),
+                child: Text(
+                  "Trade",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 8.f,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
