@@ -42,7 +42,7 @@ class _HomeDesktop extends StatefulWidget {
 
 class __HomeDesktopState extends State<_HomeDesktop> {
   final ValueNotifier<int> _tabSelected = ValueNotifier(1);
-  final List<Widget> _widgets = [];
+  // final List<Widget> _widgets = [];
   final List<String> _brands = ["INFY", "TATAMOTORS", 'SBIN'];
   final List<Color> _brandColors = [
     Colors.green,
@@ -226,19 +226,62 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                     BarChartRodStackItem(
                                       0,
                                       (data[i] * i).toDouble(),
-                                      Colors.red,
+                                      Colors.deepPurple.withOpacity(0.25),
                                     ),
                                     BarChartRodStackItem(
                                       (data[i] * i).toDouble(),
                                       (data[i] * i).toDouble() + 1.h,
                                       Colors.white,
                                     ),
+                                    BarChartRodStackItem(
+                                      (data[i] * i).toDouble() + 1.h,
+                                      (data[i] * i).toDouble() + 2.h,
+                                      Colors.deepPurple.withOpacity(0.75),
+                                    ),
                                   ],
                                   toY: (data[i] * i).toDouble() + 2.h,
-                                  color: Colors.red,
+                                  color: Colors.deepPurple.withOpacity(0.25),
                                 ),
                               ],
                             )
+                        ],
+                      ),
+                    ),
+                  ),
+                  AspectRatio(
+                    aspectRatio: 2,
+                    child: LineChart(
+                      LineChartData(
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        titlesData: const FlTitlesData(show: false),
+                        gridData: const FlGridData(show: false),
+                        lineBarsData: [
+                          LineChartBarData(
+                            belowBarData: BarAreaData(
+                              show: true,
+                              gradient: LinearGradient(colors: [
+                                Colors.deepPurple.withOpacity(0.25),
+                                Colors.deepPurple.withOpacity(0.2),
+                              ]),
+                            ),
+                            gradient: const LinearGradient(colors: [
+                              Colors.deepPurple,
+                              Colors.deepPurpleAccent,
+                            ]),
+                            isStrokeCapRound: true,
+                            barWidth: 1.f,
+                            spots: [
+                              const FlSpot(0, 0),
+                              for (var i = 1; i < data.length; i++)
+                                FlSpot(
+                                  (i).toDouble(),
+                                  (data[i] * i).toDouble(),
+                                )
+                            ],
+                            isCurved: true,
+                          )
                         ],
                       ),
                     ),
