@@ -4,6 +4,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:graph_task/constants/colors.dart';
 import 'package:graph_task/screens/home_screen.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:sizer_pro/sizer.dart';
 
 void main(List<String> args) {
@@ -15,21 +16,23 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp(
-          theme: ThemeData(
-            useMaterial3: true,
-            scaffoldBackgroundColor: AppColors.bg,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: AppColors.bg,
-              elevation: 0,
+    return ResponsiveApp(builder: (context) {
+      return Sizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            theme: ThemeData(
+              useMaterial3: true,
+              scaffoldBackgroundColor: AppColors.bg,
+              appBarTheme: const AppBarTheme(
+                backgroundColor: AppColors.bg,
+                elevation: 0,
+              ),
             ),
-          ),
-          home: const HomeScreen(),
-        );
-      },
-    );
+            home: const HomeScreen(),
+          );
+        },
+      );
+    });
   }
 }
 
