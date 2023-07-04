@@ -183,7 +183,10 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                       SizedBox(
                                         width: 5.w,
                                       ),
-                                      const Expanded(child: Column()),
+                                      const Expanded(
+                                          child: Column(
+                                        children: [_VolumeCard()],
+                                      )),
                                     ],
                                   )
                                 ],
@@ -321,6 +324,115 @@ class __HomeDesktopState extends State<_HomeDesktop> {
   }
 }
 
+class _VolumeCard extends StatelessWidget {
+  const _VolumeCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(5.f),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Volume",
+              style: TextStyle(
+                color: AppColors.text,
+                fontSize: 8.f,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                top: 5.f,
+              ),
+              padding: EdgeInsets.all(10.f),
+              decoration: BoxDecoration(
+                color: AppColors.text.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(10.sp),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "28,98,053\n",
+                    style: TextStyle(
+                      fontSize: 9.f,
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "Last Trated Qty",
+                      children: [
+                        TextSpan(
+                          text: "\n500\n",
+                          style: TextStyle(
+                            fontSize: 6.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 5.f,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Lower circuit",
+                        style: TextStyle(
+                          fontSize: 5.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        "936.46",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Upper circuit",
+                        style: TextStyle(
+                          fontSize: 5.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        "984.20",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 8.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _PriceIndicatorCard extends StatelessWidget {
   const _PriceIndicatorCard({
     required this.priIndicators,
@@ -410,245 +522,6 @@ class _PriceIndicatorCard extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _QtyText extends StatelessWidget {
-  const _QtyText();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 1.5.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text.rich(
-            TextSpan(
-              text: "16,11,023",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 5.f,
-                fontWeight: FontWeight.bold,
-              ),
-              children: const [
-                TextSpan(
-                  text: "\nTotal Qty",
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-          ),
-          Text.rich(
-            TextSpan(
-              text: "16,11,023",
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 5.f,
-                fontWeight: FontWeight.bold,
-              ),
-              children: const [
-                TextSpan(
-                  text: "\nTotal Qty",
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _BuySellCard extends StatelessWidget {
-  const _BuySellCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.zero,
-      clipBehavior: Clip.antiAlias,
-      elevation: 5,
-      child: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: 0.5.h) +
-                EdgeInsets.symmetric(horizontal: 2.w),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Qty | Orders",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 7.f,
-                        ),
-                      ),
-                      Text(
-                        "BUY",
-                        style: TextStyle(
-                          color: Colors.green,
-                          fontSize: 7.f,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 1.w,
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "SELL",
-                        style: TextStyle(
-                          color: Colors.deepPurple,
-                          fontSize: 7.f,
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      Text(
-                        "Qty | Orders",
-                        style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 7.f,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          for (var i = 0; i < 5; i++)
-            Row(
-              children: [
-                Expanded(
-                  child: _DualColoredBox(
-                    color1: Colors.grey.shade200,
-                    color2: Colors.green,
-                    fillPercent: 40,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "   195 | 1.1k",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 7.f,
-                          ),
-                        ),
-                        Text(
-                          "950.15",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 7.f,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: _DualColoredBox(
-                    color1: Colors.deepPurple.withOpacity(0.75),
-                    color2: Colors.deepPurple.withOpacity(0.25),
-                    fillPercent: 90,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "950.15",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 7.f,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        Text(
-                          "195 | 1.1k   ",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 7.f,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-Stream<List<double>> generateNumbers = (() async* {
-  List<double> graphPoints = [];
-  var rand = Random();
-
-  while (true) {
-    await Future<void>.delayed(const Duration(seconds: 5));
-    if (graphPoints.isEmpty) {
-      for (var i = 0; i < 25; i++) {
-        graphPoints.add(rand.nextDouble() * 100);
-      }
-    } else {
-      graphPoints.removeAt(0);
-      graphPoints.add(rand.nextDouble() * 100);
-    }
-    debugPrint("Working");
-    yield graphPoints;
-  }
-})();
-
-class _DualColoredBox extends StatelessWidget {
-  const _DualColoredBox(
-      {required this.child,
-      required this.color1,
-      required this.color2,
-      required this.fillPercent});
-
-  final Widget child;
-  final Color color1, color2;
-  final double fillPercent;
-
-  @override
-  Widget build(BuildContext context) {
-    final List<Color> gradient = [
-      color1,
-      color1,
-      color2,
-      color2,
-    ];
-    double fillStop = (100 - fillPercent) / 100;
-    final List<double> stops = [0.0, fillStop, fillStop, 1.0];
-
-    return Container(
-      padding: EdgeInsets.all(2.5.f),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: gradient,
-          stops: stops,
-          end: Alignment.centerRight,
-          begin: Alignment.centerLeft,
-        ),
-      ),
-      child: child,
     );
   }
 }
