@@ -171,7 +171,10 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                     children: [
                                       const Expanded(
                                           child: Column(
-                                        children: [_BuySellCard()],
+                                        children: [
+                                          _BuySellCard(),
+                                          _QtyText(),
+                                        ],
                                       )),
                                       SizedBox(
                                         width: 5.w,
@@ -309,6 +312,58 @@ class __HomeDesktopState extends State<_HomeDesktop> {
             return Text('State: ${snapshot.connectionState}');
           }
         },
+      ),
+    );
+  }
+}
+
+class _QtyText extends StatelessWidget {
+  const _QtyText();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 1.5.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text.rich(
+            TextSpan(
+              text: "16,11,023",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 5.f,
+                fontWeight: FontWeight.bold,
+              ),
+              children: const [
+                TextSpan(
+                  text: "\nTotal Qty",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Text.rich(
+            TextSpan(
+              text: "16,11,023",
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 5.f,
+                fontWeight: FontWeight.bold,
+              ),
+              children: const [
+                TextSpan(
+                  text: "\nTotal Qty",
+                  style: TextStyle(
+                    color: Colors.grey,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
