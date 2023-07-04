@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttericon/font_awesome_icons.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:sizer_pro/sizer.dart';
 
@@ -48,54 +49,7 @@ class __HomeDesktopState extends State<_HomeDesktop> {
           SizedBox(
             height: 1.h,
           ),
-          Row(children: [
-            const Spacer(),
-            Expanded(
-              flex: 9,
-              child: Row(
-                children: [
-                  const _MiniCurrencyCard(
-                    "BSE Ltd",
-                  ),
-                  SizedBox(
-                    width: 1.5.w,
-                  ),
-                  const _MiniCurrencyCard(
-                    "Nifty 50",
-                  ),
-                  const Spacer(),
-                  Icon(
-                    Icons.search_outlined,
-                    color: Colors.black54,
-                    size: 18.f,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                      left: 2.w,
-                      right: 5.w,
-                    ),
-                    padding: EdgeInsets.all(4.sp),
-                    decoration: const ShapeDecoration(
-                      shape: StadiumBorder(),
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.pinkAccent,
-                          Colors.purpleAccent,
-                        ],
-                      ),
-                    ),
-                    child: Wrap(
-                      children: [
-                        // Icon(
-                        //   Icons.tree,
-                        // )
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ]),
+          const _Header(),
           Row(children: [
             Expanded(
               child: ValueListenableBuilder(
@@ -121,6 +75,77 @@ class __HomeDesktopState extends State<_HomeDesktop> {
   }
 }
 
+class _Header extends StatelessWidget {
+  const _Header();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(children: [
+      const Spacer(),
+      Expanded(
+        flex: 9,
+        child: Row(
+          children: [
+            const _MiniCurrencyCard(
+              "BSE Ltd",
+            ),
+            SizedBox(
+              width: 1.5.w,
+            ),
+            const _MiniCurrencyCard(
+              "Nifty 50",
+            ),
+            const Spacer(),
+            Icon(
+              Icons.search_outlined,
+              color: Colors.black54,
+              size: 18.f,
+            ),
+            Container(
+              margin: EdgeInsets.only(
+                left: 2.w,
+                right: 5.w,
+              ),
+              padding: EdgeInsets.symmetric(
+                vertical: 2.f,
+                horizontal: 5.f,
+              ),
+              decoration: ShapeDecoration(
+                shape: const StadiumBorder(),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    Colors.purpleAccent,
+                    Colors.purple.shade400,
+                  ],
+                ),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    FontAwesome.tree,
+                    color: Colors.white,
+                    size: 7.f,
+                  ),
+                  Text(
+                    " 11",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 7.f,
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ]);
+  }
+}
+
 class _MiniCurrencyCard extends StatelessWidget {
   const _MiniCurrencyCard(this.title);
   final String title;
@@ -134,6 +159,7 @@ class _MiniCurrencyCard extends StatelessWidget {
     }
     return Material(
       color: Colors.white,
+      borderRadius: BorderRadius.circular(3.sp),
       elevation: 2,
       child: SizedBox(
         height: 12.5.w,
