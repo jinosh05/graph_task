@@ -38,11 +38,12 @@ class _HomeDesktop extends StatefulWidget {
 }
 
 class __HomeDesktopState extends State<_HomeDesktop> {
-  final ValueNotifier<int> _tabSelected = ValueNotifier(0);
+  final ValueNotifier<int> _tabSelected = ValueNotifier(1);
   final List<Widget> _widgets = [];
 
   @override
   Widget build(BuildContext context) {
+    for (var i = 0; i < 5; i++) {}
     return Scaffold(
       body: Column(
         children: [
@@ -55,7 +56,41 @@ class __HomeDesktopState extends State<_HomeDesktop> {
               child: ValueListenableBuilder(
                 valueListenable: _tabSelected,
                 builder: (context, int index, child) {
-                  return const Column();
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      for (var i = 1; i <= 5; i++)
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 5.f,
+                            horizontal: 2.f,
+                          ),
+                          child: Material(
+                            color: Colors.white,
+                            elevation: 3,
+                            borderRadius: BorderRadius.circular(3.sp),
+                            child: InkWell(
+                              onTap: () {
+                                _tabSelected.value = i;
+                              },
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 2.f,
+                                  horizontal: 5.f,
+                                ),
+                                child: Text(
+                                  "Watchlist $i ",
+                                  style: TextStyle(
+                                    color:
+                                        i == index ? Colors.blue : Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                    ],
+                  );
                 },
               ),
             ),
