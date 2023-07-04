@@ -43,7 +43,8 @@ class _HomeDesktop extends StatefulWidget {
 class __HomeDesktopState extends State<_HomeDesktop> {
   final ValueNotifier<int> _tabSelected = ValueNotifier(1);
   // final List<Widget> _widgets = [];
-  final List<String> _brands = ["INFY", "TATAMOTORS", 'SBIN'];
+  final List<String> _brands = ["INFY", "TATAMOTORS", 'SBIN'],
+      priIndicators = ["Open", "High", "Low", "Close"];
   final List<Color> _brandColors = [
     Colors.green,
     Colors.orange,
@@ -138,6 +139,7 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                         Expanded(
                           flex: 5,
                           child: Card(
+                            color: Colors.white.withOpacity(0.95),
                             margin: EdgeInsets.only(right: 2.w),
                             child: SingleChildScrollView(
                               padding: EdgeInsets.all(15.sp),
@@ -169,11 +171,13 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                   // ),
                                   Row(
                                     children: [
-                                      const Expanded(
+                                      Expanded(
                                           child: Column(
                                         children: [
-                                          _BuySellCard(),
-                                          _QtyText(),
+                                          const _BuySellCard(),
+                                          const _QtyText(),
+                                          _PriceIndicatorCard(
+                                              priIndicators: priIndicators)
                                         ],
                                       )),
                                       SizedBox(
@@ -312,6 +316,99 @@ class __HomeDesktopState extends State<_HomeDesktop> {
             return Text('State: ${snapshot.connectionState}');
           }
         },
+      ),
+    );
+  }
+}
+
+class _PriceIndicatorCard extends StatelessWidget {
+  const _PriceIndicatorCard({
+    required this.priIndicators,
+  });
+
+  final List<String> priIndicators;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 3,
+      child: Padding(
+        padding: EdgeInsets.all(5.f),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Price Indicators",
+              style: TextStyle(
+                color: AppColors.text,
+                fontSize: 8.f,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.only(
+                top: 5.f,
+              ),
+              padding: EdgeInsets.all(10.f),
+              decoration: BoxDecoration(
+                color: AppColors.text.withOpacity(0.25),
+                borderRadius: BorderRadius.circular(10.sp),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      for (var i = 0; i < priIndicators.length; i++)
+                        Text.rich(
+                          textAlign: TextAlign.center,
+                          TextSpan(
+                            text: "925.67",
+                            children: [
+                              TextSpan(
+                                text: "\n${priIndicators[i]}".toUpperCase(),
+                                style: TextStyle(
+                                  color: AppColors.text.withOpacity(0.75),
+                                  fontSize: 5.f,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 8.f,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  Text.rich(
+                    TextSpan(
+                      text: "\nAverage Trade Price",
+                      children: [
+                        TextSpan(
+                          text: "\n925.67",
+                          style: TextStyle(
+                            fontSize: 7.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 6.f,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
