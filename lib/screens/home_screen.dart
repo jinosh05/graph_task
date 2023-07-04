@@ -41,6 +41,11 @@ class __HomeDesktopState extends State<_HomeDesktop> {
   final ValueNotifier<int> _tabSelected = ValueNotifier(1);
   final List<Widget> _widgets = [];
   final List<String> _brands = ["INFY", "TATAMOTORS", 'SBIN'];
+  final List<Color> _brandColors = [
+    Colors.green,
+    Colors.orange,
+    Colors.orangeAccent
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -118,45 +123,11 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                 SizedBox(
                                   height: 3.h,
                                 ),
-                                Row(
-                                  children: [
-                                    Card(
-                                      margin: EdgeInsets.only(
-                                          left: 2.w, right: 1.w),
-                                      child: Builder(builder: (context) {
-                                        List<double> data = [];
-                                        var rand = Random();
-                                        for (var i = 0; i < 10; i++) {
-                                          data.add(rand.nextDouble());
-                                        }
-                                        return Container(
-                                          height: 8.w,
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 2.w),
-                                          child: Sparkline(
-                                            data: data,
-                                            fillMode: FillMode.below,
-                                            useCubicSmoothing: true,
-                                            lineWidth: 1.0,
-                                            averageLine: false,
-                                            pointSize: 1.sp,
-                                            fallbackWidth: 8.w,
-                                            lineColor:
-                                                Colors.green.withOpacity(0.25),
-                                            fillGradient: const LinearGradient(
-                                              begin: Alignment.topCenter,
-                                              end: Alignment.bottomCenter,
-                                              colors: [
-                                                Colors.green,
-                                                Colors.white
-                                              ],
-                                            ),
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                  ],
-                                )
+                                for (var i = 0; i < 3; i++)
+                                  _CurrencyDetailsRow(
+                                      brandColors: _brandColors,
+                                      i: i,
+                                      brands: _brands)
                               ],
                             ),
                           ),
@@ -177,6 +148,103 @@ class __HomeDesktopState extends State<_HomeDesktop> {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _CurrencyDetailsRow extends StatelessWidget {
+  const _CurrencyDetailsRow({
+    required List<Color> brandColors,
+    required this.i,
+    required List<String> brands,
+  })  : _brandColors = brandColors,
+        _brands = brands;
+
+  final List<Color> _brandColors;
+  final int i;
+  final List<String> _brands;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(
+              3.sp,
+            ),
+          ),
+          margin: EdgeInsets.only(bottom: 1.h, left: 2.w, right: 1.w),
+          child: Builder(builder: (context) {
+            List<double> data = [];
+            var rand = Random();
+            for (var i = 0; i < 10; i++) {
+              data.add(rand.nextDouble());
+            }
+            return Container(
+              height: 10.w,
+              padding: EdgeInsets.symmetric(vertical: 2.w),
+              child: Sparkline(
+                data: data,
+                fillMode: FillMode.below,
+                useCubicSmoothing: true,
+                lineWidth: 1.0,
+                averageLine: false,
+                pointSize: 1.sp,
+                fallbackWidth: 10.w,
+                lineColor: _brandColors[i].withOpacity(0.25),
+                fillGradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [_brandColors[i], Colors.white],
+                ),
+              ),
+            );
+          }),
+        ),
+        Expanded(
+          child: Text(
+            _brands[i],
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 6.f,
+            ),
+          ),
+        ),
+        Wrap(
+          direction: Axis.vertical,
+          crossAxisAlignment: WrapCrossAlignment.end,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 0.5.f, horizontal: 1.f),
+              decoration: BoxDecoration(
+                color: _brandColors[i].withOpacity(0.75),
+                borderRadius: BorderRadius.circular(2.sp),
+              ),
+              child: Text(
+                "+0.75% +1.345",
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 4.5.f,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            Text(
+              "212.85",
+              style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 7.f,
+                color: _brandColors[i],
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          width: 1.w,
+        )
+      ],
     );
   }
 }
