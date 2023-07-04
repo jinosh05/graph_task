@@ -41,14 +41,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.1"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      sha256: e35129dc44c9118cee2a5603506d823bab99c68393879edb440e0090d07586be
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.5"
   equatable:
     dependency: transitive
     description:
@@ -139,6 +131,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  sizer_pro:
+    dependency: "direct main"
+    description:
+      name: sizer_pro
+      sha256: "9ee765d9a1460e22e225ed0a2e8079fb2d48fc44abc5bb8980ce890e5cbb2daa"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
