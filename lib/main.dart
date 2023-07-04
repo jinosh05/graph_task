@@ -83,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: BarChartAlignment.spaceBetween,
                         titlesData: const FlTitlesData(show: false),
                         borderData: FlBorderData(
-                          show: true,
+                          show: false,
                         ),
                         gridData: const FlGridData(show: false),
                         barGroups: [
@@ -103,11 +103,11 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                     BarChartRodStackItem(
                                       (graphPoints[i] * i).toDouble(),
-                                      (graphPoints[i] * i).toDouble() + 0.5,
+                                      (graphPoints[i] * i).toDouble() + 5,
                                       Colors.white,
                                     ),
                                   ],
-                                  toY: (graphPoints[i] * i).toDouble() + 1,
+                                  toY: (graphPoints[i] * i).toDouble() + 10,
                                   color: Colors.red,
                                 ),
                               ],
@@ -123,9 +123,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     aspectRatio: 2,
                     child: LineChart(
                       LineChartData(
-                        // maxX: 6,
-                        // minX: 1,
-                        // minY: 2,
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
                         titlesData: const FlTitlesData(show: false),
                         gridData: const FlGridData(show: false),
                         lineBarsData: [
