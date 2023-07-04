@@ -139,8 +139,8 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                           flex: 5,
                           child: Card(
                             margin: EdgeInsets.only(right: 2.w),
-                            child: Padding(
-                              padding: EdgeInsets.all(12.sp),
+                            child: SingleChildScrollView(
+                              padding: EdgeInsets.all(15.sp),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -162,10 +162,23 @@ class __HomeDesktopState extends State<_HomeDesktop> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  _streamingChart()
+                                  // Padding(
+                                  //   padding:
+                                  //       EdgeInsets.symmetric(vertical: 1.h),
+                                  //   child: _streamingChart(),
+                                  // ),
+                                  Row(
+                                    children: [
+                                      const Expanded(
+                                          child: Column(
+                                        children: [_BuySellCard()],
+                                      )),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      const Expanded(child: Column()),
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -186,6 +199,7 @@ class __HomeDesktopState extends State<_HomeDesktop> {
   Card _streamingChart() {
     return Card(
       elevation: 5,
+      clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.zero,
       child: StreamBuilder<List<double>>(
         stream: generateNumbers,
@@ -300,6 +314,137 @@ class __HomeDesktopState extends State<_HomeDesktop> {
   }
 }
 
+class _BuySellCard extends StatelessWidget {
+  const _BuySellCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: EdgeInsets.zero,
+      clipBehavior: Clip.antiAlias,
+      elevation: 5,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 0.5.h) +
+                EdgeInsets.symmetric(horizontal: 2.w),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Qty | Orders",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 7.f,
+                        ),
+                      ),
+                      Text(
+                        "BUY",
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 7.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: 1.w,
+                ),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "SELL",
+                        style: TextStyle(
+                          color: Colors.deepPurple,
+                          fontSize: 7.f,
+                          fontWeight: FontWeight.w800,
+                        ),
+                      ),
+                      Text(
+                        "Qty | Orders",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 7.f,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          for (var i = 0; i < 5; i++)
+            Row(
+              children: [
+                Expanded(
+                  child: _DualColoredBox(
+                    color1: Colors.grey.shade200,
+                    color2: Colors.green,
+                    fillPercent: 40,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "   195 | 1.1k",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 7.f,
+                          ),
+                        ),
+                        Text(
+                          "950.15",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 7.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: _DualColoredBox(
+                    color1: Colors.deepPurple.withOpacity(0.75),
+                    color2: Colors.deepPurple.withOpacity(0.25),
+                    fillPercent: 90,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "950.15",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 7.f,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        Text(
+                          "195 | 1.1k   ",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 7.f,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ],
+      ),
+    );
+  }
+}
+
 Stream<List<double>> generateNumbers = (() async* {
   List<double> graphPoints = [];
   var rand = Random();
@@ -318,3 +463,40 @@ Stream<List<double>> generateNumbers = (() async* {
     yield graphPoints;
   }
 })();
+
+class _DualColoredBox extends StatelessWidget {
+  const _DualColoredBox(
+      {required this.child,
+      required this.color1,
+      required this.color2,
+      required this.fillPercent});
+
+  final Widget child;
+  final Color color1, color2;
+  final double fillPercent;
+
+  @override
+  Widget build(BuildContext context) {
+    final List<Color> gradient = [
+      color1,
+      color1,
+      color2,
+      color2,
+    ];
+    double fillStop = (100 - fillPercent) / 100;
+    final List<double> stops = [0.0, fillStop, fillStop, 1.0];
+
+    return Container(
+      padding: EdgeInsets.all(2.5.f),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: gradient,
+          stops: stops,
+          end: Alignment.centerRight,
+          begin: Alignment.centerLeft,
+        ),
+      ),
+      child: child,
+    );
+  }
+}
