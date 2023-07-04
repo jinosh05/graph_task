@@ -11,6 +11,7 @@ dependencies:
 
   sizer_pro: ^2.1.0
   fl_chart: ^0.63.0
+  responsive_builder: ^0.7.0
 
 dev_dependencies:
   flutter_test:

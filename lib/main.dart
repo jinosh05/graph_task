@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:graph_task/constants/colors.dart';
 import 'package:graph_task/screens/home_screen.dart';
 import 'package:sizer_pro/sizer.dart';
 
@@ -17,7 +18,14 @@ class MainApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          theme: ThemeData(useMaterial3: true),
+          theme: ThemeData(
+            useMaterial3: true,
+            scaffoldBackgroundColor: AppColors.bg,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: AppColors.bg,
+              elevation: 0,
+            ),
+          ),
           home: const HomeScreen(),
         );
       },
