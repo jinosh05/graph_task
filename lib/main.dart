@@ -22,6 +22,10 @@ class MainApp extends StatelessWidget {
           return MaterialApp(
             theme: ThemeData(
               useMaterial3: true,
+              cardTheme: const CardTheme(
+                color: Colors.white,
+                surfaceTintColor: Colors.white,
+              ),
               scaffoldBackgroundColor: AppColors.bg,
               appBarTheme: const AppBarTheme(
                 backgroundColor: AppColors.bg,
